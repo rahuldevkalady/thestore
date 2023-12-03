@@ -1,0 +1,8 @@
+<h1>{{ supplier.username }}'s Products</h1>
+
+<ul>
+    {% for product in products %}
+        <li>{{ product.product_name }} - {{ product.price }} - {{ product.product_id}}    <a href="{% url 'delete_product' product_id=product.product_id %}">delete</a></li>
+    {% endfor %}
+</ul>
+

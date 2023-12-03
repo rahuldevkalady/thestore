@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>supplier_panel</title>
+</head>
+<body>
+
+<h1>{{s.username}}'s Profile <br> Panel id={{s.supplier_id}}</h1>
+
+<div style="font-size:150%;">
+    <a href="{% url 'create_product' supplier_id=s.supplier_id %}">Create</a><br>
+    <a href="{% url 'products_by_supplier' supplier_id=s.supplier_id %}">View Products</a><br>
+    <a href="">Order Processing ( Order Confirmation, Order Fulfillment)</a><br>
+    <a href="supplier_login">logout</a><br>
+</div>
+
+</body>
+</html>

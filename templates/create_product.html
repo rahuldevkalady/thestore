@@ -1,0 +1,16 @@
+<h2>Add Product</h2>
+<form method="POST" action="create_product" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h1>{{s.username}}'s Supplier Panel id={{s.supplier_id}}</h1>
+    {{ form.as_p }}
+    {% if not request.method == 'POST' %}
+        <button type="submit">Enter</button>
+    {% endif %}
+
+
+    {% if response == "Successfully Added...!" %}
+        {{response}}
+        <br>
+
+    {% endif %}
+</form>
