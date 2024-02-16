@@ -11,24 +11,22 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 import uuid  # for generating unique tokens
 from django.urls import reverse
-# Create your views here.
+import razorpay
+from django.conf import settings
+from decimal import Decimal
+import json
 
 
 # Home Paths
 def base_index(request):
-    return render(request, 'base_index.html')
+    a=product_s.objects.all()[0:16:2]
+    b=product_s.objects.all()[0:8:2]
+    return render(request, 'base_index.html',{'a':a,'b':b})
 def page_links(request):
     return render(request, 'page_links.html')
 # Other Paths
 def blank(request):
     return render(request, 'blank.html')
-def checkout(request):
-    return render(request, 'checkout.html')
-
-def all_stores(request):
-    return render(request, 'all_stores.html')
-def all_products(request):
-    return render(request, 'all_products.html')
 # #######################    Customer login Setup    ###################################################################
 # user registration
 def signup(request):
@@ -85,8 +83,9 @@ def my_view(request):
 def index(request, customer_id):
     customer_id = int(customer_id)
     profile = customer.objects.filter(customer_id=customer_id)
-    product = product_s.objects.all()
-    return render(request, 'index.html', {'profile': profile, 'product': product,'customer_id':customer_id})
+    product = product_s.objects.all()[0:12]
+    p = product_s.objects.all()[0:12:3]
+    return render(request, 'index.html', {'profile': profile, 'product': product,'customer_id':customer_id,'p':p})
 def back_home(request, customer_id):
     return redirect('index', customer_id=customer_id)
 def back_home1(request, customer_id,product_id):
@@ -181,10 +180,14 @@ def admin_view(request):
         if request.method == 'POST':
             username = request.POST["username"]
             password = request.POST["password"]
+            c = customer.objects.all()
+            p = supplier.objects.all()
+            a = product_s.objects.all()
+            b = order.objects.all()
             try:
                 d = thestore_admin.objects.get(username=username)
                 if d.password == password and d.password != "":
-                    return render(request, 'admin_panel.html')
+                    return render(request, 'admin_panel.html',{'c':c,'p':p,'a':a,'b':b})
                 else:
                     error_message = "Invalid username or password. Please try again."
                     return render(request, 'admin_login.html', {'error_message': error_message})
@@ -354,13 +357,107 @@ def remove_from_cart(request,customer_id,product_id):
 def product_category(request,customer_id):
     a = product_s.objects.all()[0:6:2]
     c = product_s.objects.all()
-    for i in c:
-        print(i.category_id)
     b = category.objects.all()
-    return render(request, 'product_category.html',{'a':a,'b':b,'c':c})
-def product_category_by_id(request):
-    c=category.objects.filter(category_id=1)
-    print(c)
-    for i in c:
-        print(i.category_id)
-    return render(request, 'product_category_by_id.html',{'c':c})
+    customer_id = int(customer_id)
+    return render(request, 'product_category.html',{'a':a,'b':b,'c':c,'customer_id':customer_id})
+def product_category_by_id(request,customer_id,id):
+
+    p =product_s.objects.filter(category_id=id)
+    c = category.objects.get(category_id=id)
+    customer_id = int(customer_id)
+    return render(request, 'product_category_by_id.html', {'p': p,'c':c,'customer_id':customer_id})
+# 1=washing machine 2=television 3=refrigerator 4=induction cooker 5=air conditioner
+def hot_deal(request):
+    return HttpResponse("<h1> Page Not Available Right Now</h1>")
+
+def checkout(request,customer_id):
+    profile = customer.objects.get(customer_id=customer_id)
+    try:
+        # Try to get an existing cart associated with the customer
+        c = cart.objects.get(customer_id=profile)
+        print(c)
+    except cart.DoesNotExist:
+        return HttpResponse("Cart is Empty")
+    # Perform any additional logic or data retrieval needed before rendering the cart page
+    items = cart_item.objects.filter(cart=c)
+
+    t = 0
+    total_price = 0
+    for i in items:
+        if i.cart.customer_id == profile:
+            total_price = total_price + i.product_id.price
+            t = t + total_price
+            total_amount = Decimal(t)
+            t1 = float(total_amount)
+        else:
+            pass
+
+    total = t1*100
+    print(total)
+    print(profile)
+    print(items)
+
+    return render(request, 'checkout.html', {'profile': profile, 'cart': c, 'items': items, 'total_price': t1,'total':total})
+def order_process(request,customer_id,product_id):
+    try:
+        c = customer.objects.get(customer_id=customer_id)
+        p = product_s.objects.get(product_id=product_id)
+        if request.method == 'POST' and request.POST.get("address") != "":
+
+            name = request.POST.get("name")
+            address = request.POST.get("address")
+            city = request.POST.get("city")
+            country = request.POST.get("country")
+            pin = request.POST.get("pin")
+            phone_number = request.POST.get("phone_number")
+            email = request.POST.get("email")
+            landline = request.POST.get("landline")
+
+            s = order.objects.create(customer_id=c, product_id=p, name=name, address=address, city=city, country=country, pin=pin, phone_number=phone_number, email=email, landline=landline)
+            s.save()
+            return redirect('my_order', customer_id=customer_id)
+        else:
+            return HttpResponse("Order Not Placed")
+
+    except:
+        c = customer.objects.get(customer_id=customer_id)
+        p = product_s.objects.get(product_id=product_id)
+
+        return render(request, 'checkout.html', {'c': c, 'p': p})
+def my_order(request,customer_id):
+    o = order.objects.filter(customer_id=customer_id)
+    return render(request, 'my_orders.html',{'o': o})
+
+def payment(request,customer_id):
+    profile = customer.objects.get(customer_id=customer_id)
+    try:
+        # Try to get an existing cart associated with the customer
+        c = cart.objects.get(customer_id=profile)
+        print(c)
+    except cart.DoesNotExist:
+        return HttpResponse("Cart is Empty")
+    # Perform any additional logic or data retrieval needed before rendering the cart page
+    items = cart_item.objects.filter(cart=c)
+
+    t = 0
+    total_price = 0
+    for i in items:
+        if i.cart.customer_id == profile:
+            total_price = total_price + i.product_id.price
+            t = t + total_price
+            total_amount = Decimal(t)
+            t1 = float(total_amount)
+        else:
+            pass
+    client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+    payment = client.order.create({'amount': t1, 'currency': 'INR', 'payment_capture': 1})
+
+    print("***********")
+    print(payment)
+    print("***********")
+    context = {'cart': cart, 'payment': payment}
+    return HttpResponse("Payment Sucessfull",context)
+
+def supplier_orderprocess(request, supplier_id):
+    return HttpResponse("My orders list")
+

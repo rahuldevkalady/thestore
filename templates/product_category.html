@@ -129,9 +129,8 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="index">Home</a></li>
-						<li><a href="all_stores">All Stores</a></li>
-						<li><a href="product_category">Categories</a></li>
+						<li class="active"><a>Home</a></li>
+<!--						<li><a href="all_stores">All Stores</a></li>-->
 						<li><a href="view_cart">Cart</a></li>
 						<li><a href="/supplier_portal">Become a supplier</a></li>
 					</ul>
@@ -152,7 +151,7 @@
 					<div class="col-md-12">
 						<ul class="breadcrumb-tree">
 							<li><a href="#">Home</a></li>
-							<li><a href="#">All Categories</a></li>
+							<li><a >All Categories</a></li>
 						</ul>
 					</div>
 				</div>
@@ -171,21 +170,21 @@
 					<!-- ASIDE -->
 					<div id="aside" class="col-md-3">
 						<!-- aside Widget -->
-						<div class="aside">
-							<h3 class="aside-title">Categories</h3>
-							<div class="checkbox-filter">
-								{% for i in b %}
-								<div class="input-checkbox">
+<!--						<div class="aside">-->
+<!--							<h3 class="aside-title">Categories</h3>-->
+<!--							<div class="checkbox-filter">-->
+<!--								{% for i in b %}-->
+<!--								<div class="input-checkbox">-->
 
-									<label for="category-1">
-										<span></span>
-										{{i}}
+<!--									<label for="category-1">-->
+<!--										<span></span>-->
+<!--										{{i}}-->
 
-									</label>
-								</div>
-								{%endfor%}
-							</div>
-						</div>
+<!--									</label>-->
+<!--								</div>-->
+<!--								{%endfor%}-->
+<!--							</div>-->
+<!--						</div>-->
 						<!-- /aside Widget -->
 
 						<!-- aside Widget -->
@@ -202,11 +201,11 @@
 
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./img/product01.png" alt="">
+									<img src="../../../{{i.image}}" alt="{{i.image}}">
 								</div>
 								<div class="product-body">
 									<p class="product-category">{{i.category}}</p>
-									<h3 class="product-name"><a href="#">{{i.product_name|truncatechars:20}}</a></h3>
+									<h3 class="product-name"><a href="/index/{{customer_id}}/view_product/{{ i.product_id }}">{{i.product_name|truncatechars:20}}</a></h3>
 									<h4 class="product-price">{{i.price}}<del class="product-old-price"</del></h4>
 								</div>
 							</div>
@@ -253,7 +252,9 @@
 												</div>
 											</div>
 											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>BUY NOW</button>
+												<a href="/index/{{customer_id}}/view_product/{{ i.product_id }}">
+													<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>BUY NOW</button>
+												</a>
 											</div>
 										</div>
 										{% endfor %}
@@ -327,22 +328,25 @@
 								<h3 class="footer-title">About Us</h3>
 								<p>TheStore company are dedicated to enhancing your electronics appliances shopping experience at your fingertips .</P>
 								<ul class="footer-links">
-									<li><a href="#"><i class="fa fa-map-marker"></i>Kochi,Ernakulam,Kerala</a></li>
-									<li><a href="#"><i class="fa fa-phone"></i>+91 976543210</a></li>
-									<li><a href="#"><i class="fa fa-envelope-o"></i>thestore@gmail.com</a></li>
+									<li><i class="fa fa-map-marker"></i>Kochi,Ernakulam,Kerala</li>
+									<li><i class="fa fa-phone"></i>+91 976543210</li>
+									<li><i class="fa fa-envelope-o"></i>thestore@gmail.com</li>
 								</ul>
 							</div>
 						</div>
 
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
-								<h3 class="footer-title">Categories</h3>
+								<h3 style="color:white" class="product_category">Categories</h3>
+								<br>
 								<ul class="footer-links">
-									<li><a href="#">Hot deals</a></li>
-									<li><a href="#">Laptops</a></li>
-									<li><a href="#">Smartphones</a></li>
-									<li><a href="#">Cameras</a></li>
-									<li><a href="#">Accessories</a></li>
+									<li><a href="/hot_deal">Hot deals</a></li>
+									<li><a href="product_category_by_id/{{1}}">Washing machine</a></li>
+									<li><a href="product_category_by_id/{{2}}">Television</a></li>
+									<li><a href="product_category_by_id/{{3}}">Refrigerator</a></li>
+									<li><a href="product_category_by_id/{{4}}">Induction cooker</a></li>
+									<li><a href="product_category_by_id/{{5}}">Air conditioner</a></li>
+
 								</ul>
 							</div>
 						</div>
@@ -352,11 +356,10 @@
 							<div class="footer">
 								<h3 class="footer-title">Information</h3>
 								<ul class="footer-links">
-									<li><a href="#">About Us</a></li>
-									<li><a href="#">Contact Us</a></li>
-									<li><a href="#">Privacy Policy</a></li>
-									<li><a href="#">Orders and Returns</a></li>
-									<li><a href="#">Terms & Conditions</a></li>
+									<li><a>About Us</a></li>
+									<li><a>Privacy Policy</a></li>
+									<li><a>Orders and Returns</a></li>
+									<li><a>Terms & Conditions</a></li>
 								</ul>
 							</div>
 						</div>
@@ -366,8 +369,8 @@
 								<h3 class="footer-title">Service</h3>
 								<ul class="footer-links">
 									<li><a href="profile">My Account</a></li>
-									<li><a href="cart">View Cart</a></li>
-									<li><a href="">Help</a></li>
+									<li><a href="view_cart">View Cart</a></li>
+									<li><a href="/contact">Contact Us</a></li>
 								</ul>
 							</div>
 						</div>
@@ -387,12 +390,12 @@
 					<div class="row">
 						<div class="col-md-12 text-center">
 							<ul class="footer-payments">
-								<li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
-								<li><a href="#"><i class="fa fa-credit-card"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+								<li><a> <i class="fa fa-cc-visa"></i></a></li>
+								<li><a><i class="fa fa-credit-card"></i></a></li>
+								<li><a><i class="fa fa-cc-paypal"></i></a></li>
+								<li><a><i class="fa fa-cc-mastercard"></i></a></li>
+								<li><a><i class="fa fa-cc-discover"></i></a></li>
+								<li><a><i class="fa fa-cc-amex"></i></a></li>
 							</ul>
 <!--							<span class="copyright">-->
 <!--								&lt;!&ndash; Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. &ndash;&gt;-->

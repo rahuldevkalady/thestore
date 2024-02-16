@@ -35,15 +35,15 @@ urlpatterns = [
     path('index/<int:customer_id>/', views.index, name='index'),
     path('index/<int:customer_id>/back_index', views.back_home, name='back_index'),  # profile
     path('index/<int:customer_id>/view_product/<int:product_id>/back_index', views.back_home1, name='back_index'),  # product
-
+    path('hot_deal', views.hot_deal),
     # store
     path('blank', views.blank),
-    path('checkout', views.checkout),
+
 
 
     path('cart', views.cart),
-    path('all_products', views.all_products),
-    path('all_stores', views.all_stores),
+    path('index/<int:customer_id>/cart', views.cart),
+
 
     #  user
     path('my_view', views.my_view),
@@ -79,7 +79,7 @@ urlpatterns = [
     path('delete_product/<int:product_id>', views.delete_product, name='delete_product'),
 
     path('index/<int:customer_id>/product_category', views.product_category),
-    path('product_category_by_id', views.product_category_by_id, name='product_category_by_id'),
+    path('index/<int:customer_id>/product_category_by_id/<int:id>', views.product_category_by_id,name='product_category_by_id'),
 
 
 
@@ -95,7 +95,16 @@ urlpatterns = [
     path('index/<int:customer_id>/view_cart', views.view_cart, name='view_cart'),
     path('index/<int:customer_id>/view_product/<int:product_id>/view_cart1', views.view_cart1, name='view_cart1'),
     path('index/<int:customer_id>/view_product/<int:product_id>/add_to_cart', views.add_to_cart, name='add_to_cart'),
-    path('index/<int:customer_id>/remove_from_cart/<str:product_id>/', views.remove_from_cart, name='remove_from_cart')
+    path('index/<int:customer_id>/remove_from_cart/<str:product_id>/', views.remove_from_cart, name='remove_from_cart'),
+
+
+    path('index/<int:customer_id>/checkout', views.checkout),
+    path('index/<int:customer_id>/<int:product_id>/order_process', views.order_process),
+    path('index/<int:customer_id>/my_order', views.my_order, name='my_order'),
+    path('index/<int:customer_id>/payment', views.payment),
+
+    path('order_process/<int:supplier_id>', views.supplier_orderprocess),
+
 ]
 
 

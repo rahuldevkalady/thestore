@@ -53,8 +53,6 @@ class thestore_admin(models.Model):
 
 
 
-
-
 # the store Database Models
 
 class category(models.Model):
@@ -93,19 +91,25 @@ class cart_item(models.Model):
     def __int__(self):
         return self.cart
 
+
 # order processing
 class order(models.Model):
-    user = models.ForeignKey(customer, on_delete=models.CASCADE)
-    products = models.ManyToManyField(product_s, through='order_item')
+    order_id = models.AutoField(primary_key=True)
+    customer_id = models.ForeignKey(customer, on_delete=models.CASCADE)
+    product_id = models.ForeignKey(product_s, on_delete=models.CASCADE)
+    # shipping address
+    name = models.CharField(max_length=255, blank=False, null=False)
+    address = models.CharField(max_length=255, blank=False, null=False)
+    city = models.CharField(max_length=255, blank=False, null=False)
+    country = models.CharField(max_length=255, blank=False, null=False)
+    pin = models.CharField(max_length=255, blank=False, null=False)
+    phone_number = models.CharField(max_length=255, blank=False, null=False)
+    email = models.CharField(max_length=255, blank=False, null=False)
+    landline = models.CharField(max_length=255, blank=False, null=False)
+
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=50, default='Pending')
 
-
-class order_item(models.Model):
-    order = models.ForeignKey(order, on_delete=models.CASCADE)
-    product = models.ForeignKey(product_s, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(default=1)
 
 
 

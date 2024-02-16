@@ -98,7 +98,7 @@
 									<a href="profile">
 										<i class="fa fa-user-o"></i>
 										<span>Profile</span>
-										<div class="qty">2</div>
+
 									</a>
 								</div>
 
@@ -138,8 +138,8 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="index">Home</a></li>
-						<li><a href="all_stores">All Stores</a></li>
+						<li class="active"><a>Home</a></li>
+<!--						<li><a href="all_stores">All Stores</a></li>-->
 						<li><a href="product_category">Categories</a></li>
 						<li><a href="view_cart">Cart</a></li>
 						<li><a href="/supplier_portal">Become a supplier</a></li>
@@ -166,7 +166,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>Television<br>Collection</h3>
-								<a href="/product_category_by_id" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+								<a href="product_category_by_id/{{2}}" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -180,7 +180,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>Refrigerator<br>Collection</h3>
-								<a href="/index/<int:product_id>/product_category_by_id/<refrigerator>" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+								<a href="product_category_by_id/{{3}}" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -194,7 +194,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>Washing Machine<br>Collection</h3>
-								<a href="/index/<int:product_id>/product_category_by_id/<washing machine>" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+								<a href="product_category_by_id/{{1}}" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -219,10 +219,8 @@
 							<h3 class="title">New Products</h3>
 							<div style="background-color:white" class="section-nav">
 								<ul class="section-tab-nav tab-nav">
-									<li class="active"><a data-toggle="tab" href="#tab1">Air Conditioners</a></li>
-									<li><a data-toggle="tab" href="#tab1">Washing Machines</a></li>
-									<li><a data-toggle="tab" href="#tab1">Induction Cookers</a></li>
-									<li><a data-toggle="tab" href="#tab1">Televisions</a></li>
+									<li class="active"><a>All Products</a></li>
+
 								</ul>
 							</div>
 						</div>
@@ -265,7 +263,10 @@
 												</div>
 											</div>
 											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>BUY NOW</button>
+												<a href="/index/{{customer_id}}/view_product/{{ i.product_id }}">
+													<button class="add-to-cart-btn">BUY NOW</button>
+												</a>
+
 											</div>
 										</div>
 										{% endfor %}
@@ -287,42 +288,16 @@
 		<!-- /SECTION -->
 
 		<!-- HOT DEAL SECTION -->
-		<div id="hot-deal" class="section">
+		<div style="background-image: url({% static 'img/hot.PNG' %})" class="section">
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
 				<div class="row">
 					<div class="col-md-12">
 						<div class="hot-deal">
-							<ul class="hot-deal-countdown">
-								<li>
-									<div>
-										<h3>02</h3>
-										<span>Days</span>
-									</div>
-								</li>
-								<li>
-									<div>
-										<h3>10</h3>
-										<span>Hours</span>
-									</div>
-								</li>
-								<li>
-									<div>
-										<h3>34</h3>
-										<span>Mins</span>
-									</div>
-								</li>
-								<li>
-									<div>
-										<h3>60</h3>
-										<span>Secs</span>
-									</div>
-								</li>
-							</ul>
 							<h2 class="text-uppercase">hot deal this week</h2>
 							<p>New Collection Up to 50% OFF</p>
-							<a class="primary-btn cta-btn" href="#">Shop now</a>
+							<a class="primary-btn cta-btn" href="/hot_deal">Shop now</a>
 						</div>
 					</div>
 				</div>
@@ -334,184 +309,86 @@
 
 
 		<!-- SECTION -->
-		<div class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
+					<div class="section">
+						<!-- container -->
+						<div class="container">
+							<!-- row -->
+							<div class="row">
 
-					<!-- section title -->
-					<div class="col-md-12">
-						<div class="section-title">
-							<h3 class="title">Top selling</h3>
-							<div class="section-nav">
-								<ul class="section-tab-nav tab-nav">
-									<li class="active"><a data-toggle="tab" href="#tab2">Washing Machines</a></li>
-									<li><a data-toggle="tab" href="#tab2">Televisions</a></li>
-									<li><a data-toggle="tab" href="#tab2">Air Conditioners</a></li>
-									<li><a data-toggle="tab" href="#tab2">Induction Cookers</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<!-- /section title -->
-
-					<!-- Products tab & slick -->
-					<div class="col-md-12">
-						<div class="row">
-							<div class="products-tabs">
-								<!-- tab -->
-								<div id="tab2" class="tab-pane fade in active">
-									<div class="products-slick" data-nav="#slick-nav-2">
-										<!-- product -->
-										<div class="product">
-											<div class="product-img">
-												<img src="static/img/product06.png" alt="">
-												<div class="product-label">
-													<span class="sale">-30%</span>
-													<span class="new">NEW</span>
-												</div>
-											</div>
-											<div class="product-body">
-												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="product">product name goes here1</a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-											</div>
+								<!-- section title -->
+								<div class="col-md-12">
+									<div class="section-title">
+										<h3 class="title">Top selling</h3>
+										<div class="section-nav">
+											<ul class="section-tab-nav tab-nav">
+												<li class="active"><a>Top selling</a></li>
+											</ul>
 										</div>
-										<!-- /product -->
-									</div>
-
-
-									<div id="slick-nav-2" class="products-slick-nav">
-
 									</div>
 								</div>
-								<!-- /tab -->
-							</div>
-						</div>
+								<!-- /section title -->
+
+								<div  class="col-md-12">
+									<div class="row">
+										<div class="products-tabs">
+											<!-- tab -->
+											<div id="tab2" class="tab-pane fade in active">
+												<div   class="products-slick" data-nav="#slick-nav-2">
+													<!-- product -->
+													{% for i in p %}
+													<div  class="product">
+														<div style="max-width:200px; height:200px; background-color:white" class="container">
+																<div>
+																	<a href="/index/{{customer_id}}/view_product/{{ i.product_id }}">
+																		<img style="height:200px; width:200px; background-color:white; object-fit:contain; " src="../../{{i.image}}" alt="{{i.image}}" >
+																	</a>
+																</div>
+														</div>
+														<div class="product-body">
+
+															<p class="product-category">{{i.category_id}}</p>
+															<h3 class="product-name"><a href="/index/{{customer_id}}/view_product/{{ i.product_id }}">{{i.product_name|truncatechars:20}}</a></h3>
+															<h4 class="product-price">₹{{ i.price }}<del class="product-old-price">MRP</del></h4>
+															<div class="product-rating">
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+															</div>
+
+															<div class="product-btns">
+																<button class="add-to-wishlist"><a href="#" ><i class="fa fa-heart-o"></i></a></button><span class="tooltipp"></span></button>
+																<button class="add-to-compare"><a href="/index/{{customer_id}}/view_product/{{ i.product_id }}/add_to_cart"><i  class="fa fa-shopping-cart"></i></a><span class="tooltipp">add to cart</span></button>
+															</div>
+														</div>
+														<div class="add-to-cart">
+															<a href="/index/{{customer_id}}/view_product/{{ i.product_id }}">
+																<button class="add-to-cart-btn">BUY NOW</button>
+															</a>
+
+														</div>
+													</div>
+													{% endfor %}
+													<!-- /product -->
+												</div>
+
+
+												<div id="slick-nav-2" class="products-slick-nav">
+
+												</div>
+											</div>
+											<!-- /tab -->
+										</div>
+									</div>
+								</div>
+								<!-- /Products tab & slick -->
+						</div><!-- /container -->
 					</div>
 					<!-- /Products tab & slick -->
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
 		</div>
 		<!-- /SECTION -->
 
-
-		<!-- SECTION -->
-		<div class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-4 col-xs-6">
-						<div class="section-title">
-							<h4 class="title">Refrigerator</h4>
-							<div class="section-nav">
-								<div id="slick-nav-3" class="products-slick-nav"></div>
-							</div>
-						</div>
-
-						<div class="products-widget-slick" data-nav="#slick-nav-3">
-							<div>
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="static/img/product07.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Televisions</p>
-										<h3 class="product-name"><a href="product">product name goes here1</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div>
-								<!-- /product widget -->
-
-
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-4 col-xs-6">
-						<div class="section-title">
-							<h4 class="title">Air Conditioners</h4>
-							<div class="section-nav">
-								<div id="slick-nav-4" class="products-slick-nav"></div>
-							</div>
-						</div>
-
-						<div class="products-widget-slick" data-nav="#slick-nav-4">
-							<div>
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="static/img/product04.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="product">product name goes here1</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div>
-								<!-- /product widget -->
-
-
-							</div>
-						</div>
-					</div>
-
-
-					<div class="clearfix visible-sm visible-xs"></div>
-					<div class="col-md-4 col-xs-6">
-						<div class="section-title">
-							<h4 class="title">Air Conditioners</h4>
-							<div class="section-nav">
-								<div id="slick-nav-5" class="products-slick-nav"></div>
-							</div>
-						</div>
-
-						<div class="products-widget-slick" data-nav="#slick-nav-5">
-							<div>
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="static/img/product01.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="product">product name goes here1</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div>
-								<!-- /product widget -->
-
-
-							</div>
-						</div>
-					</div>
-
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /SECTION -->
 
 		<!-- NEWSLETTER -->
 		<div id="newsletter" class="section">
@@ -524,20 +401,20 @@
 							<p>Sign Up for the <strong>Flash Sale</strong></p>
 							<form>
 								<input class="input" type="email" placeholder="Enter Your Email">
-								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+								<button class="newsletter-btn"><a href="/hot_deal"><i class="fa fa-envelope"></i> Subscribe</button></a>
 							</form>
 							<ul class="newsletter-follow">
 								<li>
-									<a href="#"><i class="fa fa-facebook"></i></a>
+									<a> <i class="fa fa-facebook"></i></a>
 								</li>
 								<li>
-									<a href="#"><i class="fa fa-twitter"></i></a>
+									<a> <i class="fa fa-twitter"></i></a>
 								</li>
 								<li>
-									<a href="#"><i class="fa fa-instagram"></i></a>
+									<a> <i class="fa fa-instagram"></i></a>
 								</li>
 								<li>
-									<a href="#"><i class="fa fa-pinterest"></i></a>
+									<a> <i class="fa fa-pinterest"></i></a>
 								</li>
 							</ul>
 						</div>
@@ -562,22 +439,25 @@
 								<h3 class="footer-title">About Us</h3>
 								<p>TheStore company are dedicated to enhancing your electronics appliances shopping experience at your fingertips .</P>
 								<ul class="footer-links">
-									<li><a href="#"><i class="fa fa-map-marker"></i>Kochi,Ernakulam,Kerala</a></li>
-									<li><a href="#"><i class="fa fa-phone"></i>+91 976543210</a></li>
-									<li><a href="#"><i class="fa fa-envelope-o"></i>thestore@gmail.com</a></li>
+									<li><i class="fa fa-map-marker"></i>Kochi,Ernakulam,Kerala</li>
+									<li><i class="fa fa-phone"></i>+91 976543210</li>
+									<li><i class="fa fa-envelope-o"></i>thestore@gmail.com</li>
 								</ul>
 							</div>
 						</div>
 
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
-								<h3 class="footer-title">Categories</h3>
+								<h3 style="color:white" class="product_category">Categories</h3>
+								<br>
 								<ul class="footer-links">
-									<li><a href="#">Hot deals</a></li>
-									<li><a href="#">Laptops</a></li>
-									<li><a href="#">Smartphones</a></li>
-									<li><a href="#">Cameras</a></li>
-									<li><a href="#">Accessories</a></li>
+									<li><a href="/hot_deal">Hot deals</a></li>
+									<li><a href="product_category_by_id/{{1}}">Washing machine</a></li>
+									<li><a href="product_category_by_id/{{2}}">Television</a></li>
+									<li><a href="product_category_by_id/{{3}}">Refrigerator</a></li>
+									<li><a href="product_category_by_id/{{4}}">Induction cooker</a></li>
+									<li><a href="product_category_by_id/{{5}}">Air conditioner</a></li>
+
 								</ul>
 							</div>
 						</div>
@@ -587,11 +467,10 @@
 							<div class="footer">
 								<h3 class="footer-title">Information</h3>
 								<ul class="footer-links">
-									<li><a href="#">About Us</a></li>
-									<li><a href="#">Contact Us</a></li>
-									<li><a href="#">Privacy Policy</a></li>
-									<li><a href="#">Orders and Returns</a></li>
-									<li><a href="#">Terms & Conditions</a></li>
+									<li><a>About Us</a></li>
+									<li><a>Privacy Policy</a></li>
+									<li><a>Orders and Returns</a></li>
+									<li><a>Terms & Conditions</a></li>
 								</ul>
 							</div>
 						</div>
@@ -601,8 +480,8 @@
 								<h3 class="footer-title">Service</h3>
 								<ul class="footer-links">
 									<li><a href="profile">My Account</a></li>
-									<li><a href="cart">View Cart</a></li>
-									<li><a href="">Help</a></li>
+									<li><a href="view_cart">View Cart</a></li>
+									<li><a href="/contact">Contact Us</a></li>
 								</ul>
 							</div>
 						</div>
@@ -622,12 +501,12 @@
 					<div class="row">
 						<div class="col-md-12 text-center">
 							<ul class="footer-payments">
-								<li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
-								<li><a href="#"><i class="fa fa-credit-card"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+								<li><a> <i class="fa fa-cc-visa"></i></a></li>
+								<li><a><i class="fa fa-credit-card"></i></a></li>
+								<li><a><i class="fa fa-cc-paypal"></i></a></li>
+								<li><a><i class="fa fa-cc-mastercard"></i></a></li>
+								<li><a><i class="fa fa-cc-discover"></i></a></li>
+								<li><a><i class="fa fa-cc-amex"></i></a></li>
 							</ul>
 <!--							<span class="copyright">-->
 <!--								&lt;!&ndash; Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. &ndash;&gt;-->

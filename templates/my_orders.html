@@ -1,12 +1,17 @@
 
+
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>theSTORE. Admin</title>
-    <!-- Google font -->
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+		<title>theSTORE. Profile</title>
+
+ 		<!-- Google font -->
  		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
  		<!-- Bootstrap -->
@@ -30,24 +35,11 @@
  		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
  		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
  		<![endif]-->
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
-</head>
-<body>
-    <header>
+
+    </head>
+	<body>
+		<!-- HEADER -->
+		<header>
 			<!-- MAIN HEADER -->
 			<div id="header" style="background-color:black">
 				<!-- container -->
@@ -57,50 +49,80 @@
 						<!-- LOGO -->
 						<div class="col-md-3">
 							<div class="header-logo">
-								<a  class="logo">
+								<a href="back_index" class="logo">
 									<img src="{% static 'img/logo.png' %}" style=" width: 200px;height: auto">
 								</a>
 							</div>
 						</div>
-
 						<!-- /LOGO -->
 					</div>
 					<!-- row -->
 				</div>
 				<!-- container -->
-
-            </div>
+			</div>
 			<!-- /MAIN HEADER -->
+</header>
 
-		</header>
-<br>
-	<div class="container">
-		<h1>List of Messages</h1>
-			<table>
-				<thead>
-				<tr>
-					<th>Name</th>
-					<th>Email ID</th>
-					<th>Message</th>
-				</tr>
-				</thead>
-				<tbody>
-				{% for i in messages %}
-				<tr>
-					<td>{{ i.name }}</td>
-					<td>{{ i.email }}</td>
-					<td>{{ i.message }}</td>
-				</tr>
-				{% endfor %}
-				</tbody>
-			</table>
-	</div>
+		<!-- NAVIGATION -->
+		<nav id="navigation">
+			<!-- container -->
+			<div class="container">
+				<!-- responsive-nav -->
+
+				<!-- /responsive-nav -->
+			</div>
+			<!-- /container -->
+		</nav>
+		<!-- /NAVIGATION -->
+
+		<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="breadcrumb-header">Profile</h3>
+						<ul class="breadcrumb-tree">
+							<li><a href="back_index">Home</a></li>
+
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
 
 
-<br>
 
-</body>
-<!-- FOOTER -->
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+
+			<div class="container">
+				<h3> You're Orders</h3>
+			</div>
+			<br><br>
+            {% for i in o %}
+			<div class="container">
+                <ol>
+                   <h6>Product:  {{i.product_id}}</h6><li></li>
+                    <h6>Time:  {{i.created_at}}</h6><li></li>
+                    <h6>Delivery:  {{i.status}}</h6><li> </li><br><br><br>
+                </ol>
+
+			</div>
+            {%endfor%}
+		</div>
+		<!-- /SECTION -->
+
+
+
+
+		<!-- FOOTER -->
 		<footer id="footer">
 			<!-- top footer -->
 			<div class="section">
@@ -120,7 +142,21 @@
 							</div>
 						</div>
 
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 style="color:white" class="product_category">Categories</h3>
+								<br>
+								<ul class="footer-links">
+									<li><a href="/hot_deal">Hot deals</a></li>
+									<li><a href="product_category_by_id/{{1}}">Washing machine</a></li>
+									<li><a href="product_category_by_id/{{2}}">Television</a></li>
+									<li><a href="product_category_by_id/{{3}}">Refrigerator</a></li>
+									<li><a href="product_category_by_id/{{4}}">Induction cooker</a></li>
+									<li><a href="product_category_by_id/{{5}}">Air conditioner</a></li>
 
+								</ul>
+							</div>
+						</div>
 
 						<div class="clearfix visible-xs"></div>
 						<div  class="col-md-3 col-xs-6">
@@ -135,7 +171,16 @@
 							</div>
 						</div>
 
-
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Service</h3>
+								<ul class="footer-links">
+									<li><a href="profile">My Account</a></li>
+									<li><a href="view_cart">View Cart</a></li>
+									<li><a href="/contact">Contact Us</a></li>
+								</ul>
+							</div>
+						</div>
 					</div>
 					<!-- /row -->
 				</div>
@@ -173,4 +218,18 @@
 			<!-- /bottom footer -->
 		</footer>
 		<!-- /FOOTER -->
+
+
+
+		<!-- /FOOTER -->
+
+		<!-- jQuery Plugins -->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/slick.min.js"></script>
+		<script src="js/nouislider.min.js"></script>
+		<script src="js/jquery.zoom.min.js"></script>
+		<script src="js/main.js"></script>
+
+	</body>
 </html>

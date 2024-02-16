@@ -144,3 +144,8 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'rahuldevkalady@gmail.com'
 EMAIL_HOST_PASSWORD = 'wvwn bgur nuor kblh'
 
+
+
+
+RAZORPAY_KEY_ID = 'rzp_test_EyvU3MDrKGipMY'
+RAZORPAY_KEY_SECRET = 'QtPf9rBBC4QkeTI2RyzH9kq1'
