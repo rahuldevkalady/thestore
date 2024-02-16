@@ -47,3 +47,5 @@ secret_key.txt
 Thumbs.db
 
 */migrations/
+manage.py
+settings.py
